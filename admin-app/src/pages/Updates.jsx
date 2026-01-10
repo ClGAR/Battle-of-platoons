@@ -611,9 +611,13 @@ export default function Updates() {
   }
 
   return (
-    <div className="p-page">
-      <div className="p-head">
-        <div className="tabs">
+    <div className="card">
+      <div className="page-header">
+        <div className="card-title page-title">Updates History</div>
+        <div className="muted">Review, edit, or void uploaded daily performance data.</div>
+
+        {/* Tabs */}
+        <div className="tabs tabs-row">
           {TABS.map(t => (
             <button
               key={t.key}
@@ -626,21 +630,14 @@ export default function Updates() {
             </button>
           ))}
         </div>
-
-        <div className="p-title-row">
-          <h2 className="p-title">Updates History</h2>
-        </div>
-
-        <div className="muted">Review, edit, or void uploaded daily performance data.</div>
       </div>
 
-      <div className="card">
-        <div
-          className="tab-panel"
-          data-state={isAnimating ? "out" : "in"}
-          ref={panelRef}
-          style={panelMinHeight ? { minHeight: panelMinHeight } : undefined}
-        >
+      <div
+        className="tab-panel"
+        data-state={isAnimating ? "out" : "in"}
+        ref={panelRef}
+        style={panelMinHeight ? { minHeight: panelMinHeight } : undefined}
+      >
         {/* Filters */}
         <div
           style={{
