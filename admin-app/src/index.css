@@ -41,10 +41,11 @@ body{
   background:#fff;
   border-right: 1px solid #eef1ff;
   padding: 16px 14px;
-  position: sticky;
+  position: fixed;
   top: 0;
   height: 100vh;
-  overflow: hidden;
+  width: 260px;
+  overflow-y: auto;
 }
 
 .sb-header{
@@ -661,6 +662,7 @@ textarea.input:focus{
     border-bottom: 1px solid #eef1ff;
     position: static;
     height: auto;
+    width: auto;
     overflow: visible;
   }
   .topbar{ grid-template-columns: 1fr; }
