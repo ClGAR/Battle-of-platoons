@@ -36,6 +36,10 @@ body{
   background:#fff;
   border-right: 1px solid #eef1ff;
   padding: 16px 14px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .sb-header{
