@@ -612,22 +612,24 @@ export default function Updates() {
 
   return (
     <div className="card">
-      <div className="card-title">Updates History</div>
-      <div className="muted">Review, edit, or void uploaded daily performance data.</div>
+      <div className="page-header">
+        <div className="card-title page-title">Updates History</div>
+        <div className="muted">Review, edit, or void uploaded daily performance data.</div>
 
-      {/* Tabs */}
-      <div className="tabs" style={{ marginTop: 12 }}>
-        {TABS.map(t => (
-          <button
-            key={t.key}
-            type="button"
-            className={`tab-button${activeTab === t.key ? " active" : ""}`}
-            onClick={() => handleTabChange(t.key)}
-            disabled={loading}
-          >
-            {t.label}
-          </button>
-        ))}
+        {/* Tabs */}
+        <div className="tabs tabs-row">
+          {TABS.map(t => (
+            <button
+              key={t.key}
+              type="button"
+              className={`tab-button${activeTab === t.key ? " active" : ""}`}
+              onClick={() => handleTabChange(t.key)}
+              disabled={loading}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div
