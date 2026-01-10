@@ -131,16 +131,6 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard-page">
-      <div className="dashboard-header">
-        <div>
-          <div className="card-title">Dashboard</div>
-          <div className="muted">Month-to-date snapshot of leaderboard performance.</div>
-        </div>
-        <div className="dashboard-range">
-          {dateRange.start} - {dateRange.end}
-        </div>
-      </div>
-
       <div className="dashboard-kpis">
         <div className={`dashboard-kpi-strip${loading ? " is-loading" : ""}`}>
           <div className="dashboard-kpi">
@@ -176,12 +166,12 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="tabs dashboard-tabs">
+      <div className="dashboard-tabs">
         {VIEW_TABS.map(tab => (
           <button
             key={tab.key}
             type="button"
-            className={`tab-button${activeView === tab.key ? " active" : ""}`}
+            className={`dashboard-pill${activeView === tab.key ? " active" : ""}`}
             onClick={() => handleViewChange(tab.key)}
           >
             {tab.label}
@@ -218,11 +208,21 @@ export default function Dashboard() {
                   )}
                 </div>
                 <div className="dashboard-podium-name">{item.name}</div>
-                <div className="dashboard-podium-points">{item.points.toFixed(1)} points</div>
+                <div className="dashboard-podium-points">{item.points.toFixed(1)}</div>
+                <div className="dashboard-podium-label">points</div>
                 <div className="dashboard-podium-stats">
-                  <div>{formatNumber(item.leads)} leads</div>
-                  <div>{formatNumber(item.payins)} payins</div>
-                  <div>{formatCurrency(item.sales)} sales</div>
+                  <div>
+                    <span className="dashboard-stat-value">{formatNumber(item.leads)}</span>
+                    <span className="dashboard-stat-label">leads</span>
+                  </div>
+                  <div>
+                    <span className="dashboard-stat-value">{formatNumber(item.payins)}</span>
+                    <span className="dashboard-stat-label">payins</span>
+                  </div>
+                  <div>
+                    <span className="dashboard-stat-value">{formatCurrency(item.sales)}</span>
+                    <span className="dashboard-stat-label">sales</span>
+                  </div>
                 </div>
               </div>
             ))}
