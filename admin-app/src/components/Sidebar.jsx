@@ -22,12 +22,14 @@ const ParticipantsIcon = () => (
 const UpdatesIcon = () => (
   <svg viewBox="0 0 24 24" aria-hidden="true">
     <path
-      d="M12 20s-6.5-4.1-6.5-8.4a4 4 0 0 1 7-2.4 4 4 0 0 1 7 2.4C19.5 15.9 12 20 12 20z"
+      d="M12 5a7 7 0 1 1-5.1 2.2"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.8"
-      strokeLinejoin="round"
+      strokeLinecap="round"
     />
+    <path d="M6 5v3.5h3.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    <path d="M12 8.5v4.5l3 1.8" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
   </svg>
 );
 
@@ -69,6 +71,20 @@ const PublishingIcon = () => (
     <circle cx="12" cy="12" r="1.6" fill="currentColor" />
     <path d="M12 12c-3.3 3.3-6.8 3.4-9 1.2" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
     <path d="M12 12c-2.1 2.1-4.4 2.2-6 0.6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+  </svg>
+);
+
+const AuditIcon = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M8 4h8l3 3v13a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+    <path d="M9 11h6M9 15h6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+  </svg>
+);
+
+const FinalizationIcon = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <rect x="4" y="6" width="16" height="14" rx="2" fill="none" stroke="currentColor" strokeWidth="1.8" />
+    <path d="M8 4v4M16 4v4M7.5 11.5h9M7.5 15.5h6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
   </svg>
 );
 
@@ -159,10 +175,16 @@ export default function Sidebar() {
         {isSuperAdmin ? (
           <>
             <NavLink to="/audit-log" className={({ isActive }) => "sb-link" + (isActive ? " active" : "")}>
-              Audit Log
+              <span className="sb-icon">
+                <AuditIcon />
+              </span>
+              <span className="sb-label">Audit Log</span>
             </NavLink>
             <NavLink to="/finalization" className={({ isActive }) => "sb-link" + (isActive ? " active" : "")}>
-              Week Finalization
+              <span className="sb-icon">
+                <FinalizationIcon />
+              </span>
+              <span className="sb-label">Week Finalization</span>
             </NavLink>
           </>
         ) : null}
