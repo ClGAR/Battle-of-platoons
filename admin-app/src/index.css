@@ -279,7 +279,7 @@ textarea.input:focus{
   font-weight:800;
   color: var(--muted);
   cursor:pointer;
-  transition: background .15s ease, color .15s ease, box-shadow .15s ease;
+  transition: transform 120ms ease, background 160ms ease, box-shadow 160ms ease, color 160ms ease;
 }
 
 .tab-button.active{
@@ -288,8 +288,12 @@ textarea.input:focus{
   box-shadow: 0 8px 24px rgba(5,15,90,0.25);
   border-color: rgba(5,15,90,0.2);
 }
+
+.tab-button:active{
+  transform: translateY(1px) scale(0.98);
+}
 .tab-panel{
-  transition: opacity 120ms ease, transform 120ms ease;
+  transition: opacity 180ms ease, transform 180ms ease;
   will-change: opacity, transform;
 }
 
@@ -304,7 +308,7 @@ textarea.input:focus{
 }
 
 @media (prefers-reduced-motion: reduce){
-  .tab-panel{ transition: none; }
+  .tab-panel, .tab-button{ transition: none; }
 }
 
 .photo-section{

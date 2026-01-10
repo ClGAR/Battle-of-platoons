@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { listAgents, upsertAgent } from "../services/agents.service";
 import { listDepots, upsertDepot } from "../services/depots.service";
 import { listCompanies, upsertCompany } from "../services/companies.service";
@@ -44,6 +44,12 @@ function useFilePreview(file) {
 export default function Participants() {
   const [tab, setTab] = useState("leaders"); // leaders | companies | depots | platoons
   const [status, setStatus] = useState({ type: "", msg: "" });
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [pendingTab, setPendingTab] = useState("");
+  const [panelMinHeight, setPanelMinHeight] = useState(null);
+
+  const animationTimerRef = useRef(null);
+  const panelRef = useRef(null);
 
   const [agents, setAgents] = useState([]);
   const [depots, setDepots] = useState([]);
@@ -555,6 +561,36 @@ export default function Participants() {
   const simplePhotoPreviewUrl = simpleFilePreview || simplePhotoUrlInput.trim() || simpleForm.photoURL.trim();
   const platoonPhotoPreviewUrl = platoonFilePreview || platoonPhotoUrlInput.trim() || platoonForm.photoURL.trim();
 
+  useEffect(() => {
+    return () => {
+      if (animationTimerRef.current) clearTimeout(animationTimerRef.current);
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    if (isAnimating) return;
+    const panelEl = panelRef.current;
+    if (!panelEl) return;
+    setPanelMinHeight(panelEl.offsetHeight);
+  }, [tab, isAnimating]);
+
+  function handleTabChange(nextTab) {
+    if (nextTab === tab && !pendingTab) return;
+    if (animationTimerRef.current) clearTimeout(animationTimerRef.current);
+
+    const panelEl = panelRef.current;
+    if (panelEl) setPanelMinHeight(panelEl.offsetHeight);
+
+    setPendingTab(nextTab);
+    setIsAnimating(true);
+
+    animationTimerRef.current = setTimeout(() => {
+      setTab(nextTab);
+      setIsAnimating(false);
+      setPendingTab("");
+    }, 100);
+  }
+
   // ---- UI
   return (
     <div className="p-page">
@@ -562,25 +598,25 @@ export default function Participants() {
         <div className="tabs">
           <button
             className={`tab-button${tab === "leaders" ? " active" : ""}`}
-            onClick={() => { setTab("leaders"); setStatus({type:"",msg:""}); }}
+            onClick={() => { handleTabChange("leaders"); setStatus({type:"",msg:""}); }}
           >
             Leaders
           </button>
           <button
             className={`tab-button${tab === "companies" ? " active" : ""}`}
-            onClick={() => { setTab("companies"); clearSimple(); }}
+            onClick={() => { handleTabChange("companies"); clearSimple(); }}
           >
             Commanders
           </button>
           <button
             className={`tab-button${tab === "depots" ? " active" : ""}`}
-            onClick={() => { setTab("depots"); clearSimple(); }}
+            onClick={() => { handleTabChange("depots"); clearSimple(); }}
           >
             Depots
           </button>
           <button
             className={`tab-button${tab === "platoons" ? " active" : ""}`}
-            onClick={() => { setTab("platoons"); clearPlatoon(); }}
+            onClick={() => { handleTabChange("platoons"); clearPlatoon(); }}
           >
             Companies
           </button>
@@ -607,6 +643,12 @@ export default function Participants() {
         )}
       </div>
 
+      <div
+        className="tab-panel"
+        data-state={isAnimating ? "out" : "in"}
+        ref={panelRef}
+        style={panelMinHeight ? { minHeight: panelMinHeight } : undefined}
+      >
       {/* FORM AREA */}
       {tab === "leaders" && (
         <div className="card">
@@ -1087,6 +1129,7 @@ export default function Participants() {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }
