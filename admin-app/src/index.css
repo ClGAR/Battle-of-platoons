@@ -9,6 +9,10 @@
 }
 
 *{box-sizing:border-box;}
+html{
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+}
 body{
   margin:0;
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -268,7 +272,7 @@ textarea.input:focus{
 }
 
 .tab-button{
-  border:none;
+  border: 1px solid transparent;
   background:transparent;
   padding: 10px 14px;
   border-radius: 10px;
@@ -282,15 +286,8 @@ textarea.input:focus{
   background: var(--blue);
   color:#fff;
   box-shadow: 0 8px 24px rgba(5,15,90,0.25);
+  border-color: rgba(5,15,90,0.2);
 }
-
-.tabs-row{
-  align-items: flex-end;
-  min-height: 48px;
-  overflow: visible;
-  padding-top: 8px;
-}
-
 .tab-panel{
   transition: opacity 120ms ease, transform 120ms ease;
   will-change: opacity, transform;
@@ -792,3 +789,9 @@ textarea.input:focus{
   width: min(560px, 100%);
   box-shadow: 0 8px 30px rgba(0,0,0,0.15);
 }
+
+
+
+
+
+
