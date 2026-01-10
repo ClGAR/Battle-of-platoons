@@ -559,27 +559,27 @@ export default function Participants() {
   return (
     <div className="p-page">
       <div className="p-head">
-        <div className="tab-row">
+        <div className="tabs">
           <button
-            className={`tab-btn${tab === "leaders" ? " active" : ""}`}
+            className={`tab-button${tab === "leaders" ? " active" : ""}`}
             onClick={() => { setTab("leaders"); setStatus({type:"",msg:""}); }}
           >
             Leaders
           </button>
           <button
-            className={`tab-btn${tab === "companies" ? " active" : ""}`}
+            className={`tab-button${tab === "companies" ? " active" : ""}`}
             onClick={() => { setTab("companies"); clearSimple(); }}
           >
             Commanders
           </button>
           <button
-            className={`tab-btn${tab === "depots" ? " active" : ""}`}
+            className={`tab-button${tab === "depots" ? " active" : ""}`}
             onClick={() => { setTab("depots"); clearSimple(); }}
           >
             Depots
           </button>
           <button
-            className={`tab-btn${tab === "platoons" ? " active" : ""}`}
+            className={`tab-button${tab === "platoons" ? " active" : ""}`}
             onClick={() => { setTab("platoons"); clearPlatoon(); }}
           >
             Companies
